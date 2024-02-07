@@ -119,64 +119,111 @@
     <div class="box4">box4</div>
   </div>
 
-    <hr>
+  <hr>
 
-    <style>
+  <style>
   
-      /*
-        float + display
-        1. 수평 배치할 컨테이너들의 부모 컨테이너를 만든다.
-        2. 부모 컨테이너는 display: flow-root; 속성을 준다.
-        3. 자식 컨테이너는 float 처리한다.
-      */
+    /*
+      float + display
+      1. 수평 배치할 컨테이너들의 부모 컨테이너를 만든다.
+      2. 부모 컨테이너는 display: flow-root; 속성을 준다.
+      3. 자식 컨테이너는 float 처리한다.
+    */
   
-      .wrap3 {
-        width: 600px;
-        margin: 10px auto;
-      }
-      .wrap3 div {
-        border: 1px solid gray;
-      }
-      .wrap3 > .box1 {
-        width: 600px;
-        height: 100px;
-        text-align: center;
-        line-height: 100px;
-        border-bottom: 0;
-      }
-      .wrap3 > .inner-wrap {
-        width: 600px;
-        height: 100px;
-        display: flow-root;
-        border: 0;
-      }
-      .wrap3 > .inner-wrap > .box2, .wrap3 > .inner-wrap > .box3 {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        line-height: 100px;
-        float: left;
-      }
-      .wrap3 > .inner-wrap > .box3 {
-        border-left: 0;
-      }
-      .wrap3 > .box4 {
-        width: 600px;
-        height: 100px;
-        text-align: center;
-        line-height: 100px;
-        border-top: 0;
-      }
+  .wrap3 {
+    width: 600px;
+    margin: 10px auto;
+  }
+  .wrap3 div {
+    border: 1px solid gray;
+    }
+  .wrap3 > .box1 {
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    border-bottom: 0;
+  }
+  .wrap3 > .inner-wrap {
+    width: 600px;
+    height: 100px;
+    display: flow-root;
+    border: 0;
+  }
+  .wrap3 > .inner-wrap > .box2, .wrap3 > .inner-wrap > .box3 {
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    float: left;
+  }
+  .wrap3 > .inner-wrap > .box3 {
+    border-left: 0;
+  }
+  .wrap3 > .box4 {
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    border-top: 0;
+  }
   
-    </style>
-    <div class="wrap3">
-      <div class="box1">box1</div>
-      <div class="inner-wrap">
-        <div class="box2">box2</div>
-        <div class="box3">box3</div>
-      </div>
-      <div class="box4">box4</div>
+  </style>
+  <div class="wrap3">
+    <div class="box1">box1</div>
+    <div class="inner-wrap">
+      <div class="box2">box2</div>
+      <div class="box3">box3</div>
     </div>
+    <div class="box4">box4</div>
+  </div>
   
+  <hr>
+
+  <style>
+    ul, li{
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    gnb{
+      overflow: hidden;
+    }
+    .gnb > li{
+      float: left;
+      width: 100px;
+      height: 50px;
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+    }
+    .gnb a{
+      display: block;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 48px;
+      text-decoration: none;
+      color:black;
+    }
+    .last{
+      clear: both;
+    }
+
+    .gnb a:hover{
+      font-weight: 900;
+      border-bottom: 3px solid black;
+    }
+
+  </style>
+  <ul class="gnb">
+    <li class="li1"><a href="#">메뉴1</a></li>
+    <li class="li2"><a href="#">메뉴2</a></li>
+    <li class="li3"><a href="#">메뉴3</a></li>
+    <li class="li4"><a href="#">메뉴4</a></li>
+    <li class="li5"><a href="#">메뉴5</a></li>
+  </ul>
+  <div class="last"></div>
+
 </body>
 </html>
