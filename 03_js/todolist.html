@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<body>
+  <h1>To Do List</h1>
+  <div class="wrap">
+    <input type="text" id="input">
+    <button type="button" id="add">추가</button>
+  </div>
+  <div class="list"></div>
+
+  <script>
+    let i = 1;
+    document.getElementById('add').addEventListener('click',function(evt) {
+      let listName = document.querySelector('#input').value;
+      let removeName = document.querySelector('.list').innerHTML += ('<div class = \"list'+ (i) +'\"><input type = \"checkbox\" value = \"list\">' + listName + 
+        '<button type=\"button\" id=\"list' + (i++) + '\">삭제</button></div>');
+
+      document.querySelectorAll('.list button').forEach(function (btn){
+        btn.addEventListener('click', function (evt){
+          btn.parentElement.remove();
+        })
+      })
+      document.querySelectorAll('.list input').forEach(function(check){
+        if(check.checked == true){
+          console.log(check.checked);
+        }
+      })
+
+    });
+
+
+
+  </script>
+</body>
+</html>
