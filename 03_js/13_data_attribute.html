@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    'data-' : 어떤 값을 태그에 저장시킬 때 
+    실행 후 property 확인시 dataset이란 객체 안에 저장되어 있음. (home-address 는 homeAddress로 저장되어 있음)
+    data 속성은 -으로 연결하자. 카멜케이스 형태로 쓰지 말자(homeAddress(X) home-address(O))
+    data-homeAddress -> div.dataset.homeaddress
+
+  -->
+  <script>
+
+    /*
+      data 속성(attribute)
+
+      1. HTML 구성 요소의 data-* 속성은 데이터를 저장하기 위한 속성이다.
+      2. 모든 data-* 속성은 DOM의 dataset 속성에 저장된다.
+      3. data-* 속성 확인
+           HTML               JavaScript
+        1) data-aaa=""        dataset.aaa
+        2) data-aaa-bbb=""    dataset.aaaBbb  (dash 구분자는 자동으로 camel-cased 처리된다.)
+        3) data-aaaBbb=""     dataset.aaabbb  (대문자는 소문자로 처리된다.)
+    */
+
+  </script>
+  <div id="div1" data-name="tom" data-age="30" data-home-address="newyork">TOM</div>
+  <script>
+    var div = document.getElementById('div1');
+    console.log('data-name:', div.dataset.name);
+    console.log('data-age:', div.dataset.age);
+    console.log('data-home-address:', div.dataset.homeAddress);
+
+  </script>
+
+  <div id="div2">JESSICA</div>
+  <script>
+    var div = document.getElementById('div2');
+    div.dataset.mobile = '010-1111-1111';
+    div.dataset.dayOfBirth = '1990-01-01';
+    
+    console.log('data-mobile:', div.dataset.mobile);
+    console.log('data-day-of-birth:', div.dataset.dayOfBirth);
+  </script>
+
+</body>
+</html>
