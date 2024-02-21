@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="text" id="begin" placeholder="시작아이디순서(1-10)">
+    <input type="text" id="end" placeholder="종료아이디순서(1-10)">
+    <button type="button" id="btn1">ID : JSON로 가져오기</button>
+  </div>
+  <div id="div1">
+    <div id="content"></div>
+
+  </div>
+  <style>
+
+    #div1 {
+      width: 1000px;
+    }
+    #content {
+      width:100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #content > #id{
+      width: 400px;
+      height: 200px;
+      border: 1px solid gray;
+      border-radius: 10px;
+    }
+    #content > #id:hover{
+      background-color: lightcyan;
+    }
+    #content  #email:hover{
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+
+    function idJson(){
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+      xhr.send();
+      xhr.addEventListener('readystatechange', function(){
+        if(xhr.readyState !== XMLHttpRequest.DONE)
+          return;
+        if(xhr.status !== 200)
+          return;
+        var resData = JSON.parse(xhr.responseText);
+        var begin = document.getElementById('begin').value || 1;
+        var end = document.getElementById('end').value || 10;
+
+        var result = '';
+        for(var i = begin-1 ; i < end; i++){
+          result += '<div id="id">id: ' + resData[i].id;
+          result += '<div id="name">name: ' + resData[i].name + '</div>';
+          result += '<div id="email">email: ' +resData[i].email + '</div>';
+          result += '<div id="address">Address: ' + resData[i].address.city +', '+ resData[i].address.street + ', '+ resData[i].address.suite + '</div>'
+          result += '<div id="company">Company: ' + resData[i].company.name + '</div>'
+          result += '</div>'
+        }
+        document.getElementById('content').innerHTML = result;
+      })
+
+    }
+
+    document.getElementById('btn1').onclick = idJson;
+
+  </script>
+
+
+</body>
+</html>

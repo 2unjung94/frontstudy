@@ -64,34 +64,38 @@
   </style>
   <script>
     /* animal1.jpg ~ animal10.jpg 를 이용하여 이미지 슬라이드를 만드시오. */
+    var loc = 0;
+    var array = [1,2,3,4,5,6,7,8,9,10];
 
-    var url = [];
-    for(var i = 0 ; i < 10 ; i++){
-      url[i] = 'url(../../assets/image/animal'+ (i+1) +'.jpg)';
-    }
-    console.log(document.getElementById('img-container').style.width);
-    var idx = 1;
     function prev(){
-      if(idx === 1 ){
-        idx = url.length - 1;
-      }else{
-        idx -= 1;
+      if(loc === 0){
+        loc = 9;
+        document.getElementById('img-container').style.backgroundImage = 'url("../../assets/image/animal' + array[loc] +'.jpg")';
+        document.getElementById('img-no').textContent = (loc+1) + ' / 10';
+      } else{
+        loc -= 1;
+        document.getElementById('img-container').style.backgroundImage = 'url("../../assets/image/animal' + array[loc] +'.jpg")';
+        document.getElementById('img-no').textContent = (loc+1) + ' / 10';
       }
     }
-
+    
     function next(){
-      var idx = 1;
-      if( idx == length){
-        idx = 0;
+      if(loc===9){
+        loc = 0;
+        document.getElementById('img-container').style.backgroundImage = 'url("../../assets/image/animal' + array[loc] +'.jpg")';
+        document.getElementById('img-no').textContent = (loc+1) + ' / 10';
       }else{
-        idx += 1;
+        loc += 1;
+        document.getElementById('img-no').textContent = (loc+1) + ' / 10';
+        document.getElementById('img-container').style.backgroundImage = 'url("../../assets/image/animal' + array[loc] +'.jpg")';
       }
     }
-    // document.getElementById('img-container').style.backgroundImage = 'url(../../assets/image/animal1.jpg)';
 
-    // document.getElementById('btn-prev').addEventListener('click', function(){
-      
-    // })
+    document.getElementById('btn-prev').onclick = prev;
+    document.getElementById('btn-next').onclick = next;
+
+
+
   </script>
 
   <hr>
@@ -170,6 +174,7 @@
     </div>
   </div>
   <style>
+
     /* 
       CSS 문제.
       해제하면 check1.png를 checkbox 대신 나타내시오.
