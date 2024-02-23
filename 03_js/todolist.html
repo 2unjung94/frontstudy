@@ -16,16 +16,21 @@
 
   <script>
     let i = 1;
+    var todoList = '';
     document.getElementById('add').addEventListener('click',function(evt) {
       let listName = document.querySelector('#input').value;
-      let removeName = document.querySelector('.list').innerHTML += ('<div class = \"list'+ (i) +'\"><input type = \"checkbox\" value = \"list\">' + listName + 
-        '<button type=\"button\" id=\"list' + (i++) + '\">삭제</button></div>');
-
-      document.querySelectorAll('.list button').forEach(function (btn){
-        btn.addEventListener('click', function (evt){
-          btn.parentElement.remove();
-        })
-      })
+      todoList += '<div class="list'+(i) +'">';
+      todoList += '<input type="checkbox" value="list">'+ listName;
+      todoList += '<button type="button" id="list' + (i++) + '">삭제</button></div>';
+      // document.querySelector('.list').innerHTML += '<div class = "list'+ (i) +'"><input type="checkbox" value = "list">' + listName + 
+      //   '<button type="button" id="list' + (i++) + '">삭제</button></div>';
+      document.querySelector('.list').innerHTML = todoList;
+      
+      // document.querySelectorAll('.list button').forEach(function (btn){
+      //   btn.addEventListener('click', function (evt){
+      //     btn.parentElement.remove();
+      //   })
+      // })
       document.querySelectorAll('.list input').forEach(function(check){
         if(check.checked == true){
           console.log(check.checked);

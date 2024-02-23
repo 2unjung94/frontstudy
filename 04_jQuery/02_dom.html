@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div id="box" class="wrap">box</div>
+
+  <script>
+    
+    // jQuery 사용에 특별한 사유가 있다면 사용할 것
+
+    // 태그 인식 : 배열
+    var div = $('div');     // document.getElementsByTagName('div')
+    console.log('div', div);
+
+    // 아이디 인식 : 객체
+    var box = $('#box');    // document.getElementById('box')
+    console.log('#box', box);
+
+    // 클래스 인식 : 배열
+    var wrap = $('.wrap');  // document.getElementsByClassName('wrap')
+    console.log('.wrap',wrap);
+
+  </script>
+
+  <ul class="ott">
+    <li id="netflex"><a href="javascript:void(0)">넷플릭스</a></li>
+    <li id="disneyplus"><a href="javascript:void(0)">디즈니플러스</a></li>
+    <li id="tving"><a id="tving-link" href="javascript:void(0)">티빙</a></li>
+    <li id="wave"><a href="javascript:void(0)">웨이브</a></li>
+    <li id="coupangplay"><a href="javascript:void(0)">쿠팡플레이</a></li>
+  </ul>
+  <script>
+
+    // 1. 자식 (직계 자식)
+    console.log($('.ott > li'));
+    console.log($('.ott').find('li'));
+    console.log($('.ott').children()); // children() === children('li')
+
+    // 2. 후손
+    console.log($('.ott a'));
+    console.log($('.ott').find('a'));
+    console.log($('.ott').children('li').children('a')); // $('.ott').children('a') : 후손에서는 직접적으로 쓸 수 없다.
+    console.log($('.ott').children().children());
+
+    // 3. 일반 형제
+    console.log($('#tving ~ li'));          // 일반형제 (#tving의 다음 형제들 : 웨이브, 쿠팡)
+    console.log($('#tving').nextAll('li')); // 다음형제 (#tving의 다음 형제들 : 웨이브, 쿠팡)
+    console.log($('#tving').prevAll('li')); // 이전형제 (#tving의 이전 형제들 : 디즈니, 넷플릭스) -> CSS 에선 이런 방식이 없었다.
+    console.log($('#tving').siblings('li'));// 모든 형제(#tving의 모든 형제들)
+    
+    // 4. 인접 형제
+    console.log($('#tving + li'));        // 인접형제 (#tving의 다음 형제 : 웨이브)
+    console.log($('#tving').next('li'));  // = next() 인접형제 (#tving의 다음 형제 : 웨이브)
+    console.log($('#tving').prev('li'));  // = prev() 인접형제 (#tving의 이전 형제 : 디즈니플러스)
+
+    // 5. 부모와 조상
+    console.log($('#tving-link').parent('li'));     // 부모
+    console.log($('#tving-link').closest('li'));    // 가장 가까운 부모
+    console.log($('#tving-link').parents());        // 부모 & 조상
+
+
+  </script>
+
+  <form id="frm">
+    <div><input type="text"></div>
+    <div><input type="password"></div>
+    <div><input type="radio" name="a"><input type="radio" name="a"></div>
+    <div><input type="checkbox"><input type="checkbox"></div>
+    <div><select><option selected>A</option><option>B</option></select></div>
+    
+  </form>
+  <script>
+
+    // $(':속성값');
+    // type 속성
+    console.log($(':text'));    // type이 text인 태그
+    console.log($(':password'));
+    console.log($(':radio'));
+    console.log($(':checkbox'));
+
+    // 상태 지정
+    console.log($(':focus'));             // 포커스를 가진 요소
+    console.log($(':text:focus'));        // text 중 포커스를 가진 요소
+    console.log($(':checked'));           // 체크된 요소 (select도 checked로 본다)
+    console.log($(':radio:checked'));     // radio 중 체크된 요소
+    console.log($(':checkbox:checked'));  // checkbox 중 체크된 요소
+    console.log($(':selected'));          // 선택된 요소
+
+    // 상태 확인 (true, false 반환)
+    console.log($(':text').is(':focus'));       // text 가 focus 를 가졌으면 true 반환
+    console.log($(':radio').is(':checked'));    // radio가 체크되면 true 반환
+    console.log($('option').is(':selected'));   // option이 선택되면 true 반환
+
+
+  </script>
+
+  <hr>
+  <!-- jQuery 메소드들은 오버로딩되어 있다. -->
+  <div id="div1">hello world</div>
+  <script>
+    
+    // 내부 텍스트 : text()
+    console.log($('#div1').text());
+    $('#div1').text('안녕하세요 반갑습니다');    
+
+  </script>
+
+  <div id="div2"><h1>hello world</h1></div>
+  <script>
+    
+    // 내부 요소 : html()
+    console.log($('#div2').html());
+    $('#div2').html('<em>안녕하세요 반갑습니다</em>');
+
+  </script>
+
+  <div id="div3"><img src="../../assets/image/animal10.jpg" width="192px"></div>
+  <script>
+
+    // 태그 속성(attribute) : attr(attribute명), attr(attribute명, 값)
+    console.log($('#div3').find('img').attr('src'));    // img 태그의 src 속성 출력
+    $("#div3").find('img').attr('src', '../../assets/image/flower1.jpg'); // img 태그의 src 속성 바꾸기
+    $('#div3').find('img').removeAttr('src'); // img 태그의 src 속성 제거
+
+  </script>
+
+  <div id="div4">
+    <input type="radio" id="man" class="blind" value="M" checked="checked">
+  </div>
+  <script>
+    
+    // 문서 객체 속성(property) : prop(property명)
+    var radio = $('#div4').find(':radio');
+    console.log(radio.prop('type'));
+    console.log(radio.prop('id'));
+    console.log(radio.prop('className'), radio.prop('class'));  // attribute에서 사용하는 이름 작성하면 동일 결과 나옴
+    console.log(radio.prop('value'), radio.val());              // val () : value 전용 속성
+    console.log(radio.prop('checked'), radio.is(':checked'));
+
+    radio.prop('type','checkbox');
+    radio.removeProp('type');   // builtin property(약속된 프로퍼티)는 삭제 금지, 사용자 정의 프로퍼티만 삭제 가능
+  </script>
+
+  <div id="div5">
+    <input type="text" value="hello world">
+  </div>
+  <script>
+    // value(값) 속성 전용 함수
+    console.log($('#div5').find(':text').val());
+    $('#div5').find(':text').val('안녕하세요 반갑습니다');
+
+  </script>
+
+  <div id="div6" data-name="고길동" data-home-address="서울" data-zipCode="12345">고길동</div>
+  <script>
+    // data-* 속성 (data(data- 뒤 이름))
+    console.log($('#div6').data('name'));
+    console.log($('#div6').data('home-address'), $('#div6').data('homeAddress')); // (서울, 서울) (home-address -> homeAddress(가능), homeAddress ->home-address(가능) )
+    console.log($('#div6').data('zipCode'),      $('#div6').data('zipcode'));  // ( undefined , 12345 ) data- 선언 자체가 zipCode여서 ( zipCode->zipcode(불가), zipcode->zipCode(가능) )
+    
+    $('#div6').data('name', '홍길동');            // data-name 수정
+    $('#div6').data('mobile', '010-1111-1111');   // data-mobile 추가
+
+    console.log($('#div6').data('name'));
+    console.log($('#div6').data('mobile'));
+
+  </script>
+
+  <div id="div7">hello world</div>
+  <script>
+
+    // style 속성 css( css속성명, 값 )
+    $('#div7').css('fontSize', '32px');   // camel case 가능
+    $('#div7').css('font-weight', 900);   // 원래 이름 가능
+
+    // 여러개 하고싶으면 메소드 체이닝이나 객체로 생성해서 넣을 것.
+    $('#div7').css('text-align', 'center').css('line-height', '100px');   // 메소드 체이닝
+    $('#div7').css({    // 객체로 등록
+      width: '200px',
+      height: '100px',
+      border: '1px solid gray',
+      backgroundColor: 'yellow'
+    });
+
+  </script>
+
+  <div id="menu"></div>
+  <script>
+
+    /*
+      추가
+      1. 마지막 자식으로 추가하기
+        1) 부모.append(자식)
+        2) 자식.appendTo(부모)
+      2. 첫 번째 자식으로 추가하기
+        1) 부모.prepend(자식)
+        2) 자식.prependTo(부모)
+      3. 다음 형제로 추가하기
+        형제.after(추가할 형제)
+      4. 이전 형제로 추가하기
+        형제.before(추가할 형제)
+    */
+
+    var menu = $('#menu');
+
+    menu.append('<div>피자</div>');
+    $('<div>족발</div>').appendTo(menu); // '<div>족발</div>' 는 JavaScript 문자열 객체이기 때문에 $()로 jQuery wrap 해야 appendTo() 가능
+    menu.prepend('<div>회</div>');
+    $('<div>떡볶이</div>').prependTo(menu);
+    $('#menu > div:last-of-type').after('<div>보쌈</div>');
+    $('#menu > div:first-of-type').before('<div>아구찜</div>');
+
+    /*
+      삭제
+      1. 선택 삭제
+        요소.remove()
+      2. 모두 삭제 (하위 요소를 모두 지운다.)
+        요소.empty()        
+    */
+
+    $('#menu > div:nth-of-type(2)').remove(); // 2번째 div 삭제
+    menu.empty();
+
+  </script>
+</body> 
+</html>

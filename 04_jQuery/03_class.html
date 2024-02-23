@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="div1">hello world</div>
+  <style>
+    .blind {
+      display: none;
+    }
+    .visible {
+      display: block;
+    }
+  </style>
+  <script>
+    var div1 = $('#div1');
+
+    // class 추가
+    div1.addClass('blind');
+    // 참고 - 여러개 추가
+    // 1) 한꺼번에 넣기 : addClass('a b c ...') 공백으로 분리
+    // 2) 메소드 체이닝 : addClass(a).addClass(b).addClass(c). ... 
+
+    // class 삭제
+    div1.removeClass('blind');
+
+    // class 반전
+    // toggleClass(a) : a가 없는 상태이면 a 생성, a 가 있는 상태이면 a 삭제
+    div1.toggleClass('blind');
+    div1.toggleClass('blind');
+    div1.toggleClass('blind');
+
+    // class 확인
+    if(div1.hasClass('blind'))
+      alert('blind 되었다');
+
+  </script>
+</body>
+</html>
